@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto"
+    rel="stylesheet"
+    type="text/css"
+  />
+  <script src="https://apis.google.com/js/api:client.js"></script>
+
+  <script>
+    var googleUser = {};
+    var startApp = function () {
+      gapi.load("auth2", function () {
+        // Retrieve the singleton for the GoogleAuth library and set up the client.
+        auth2 = gapi.auth2.init({
+          client_id: "15410921000-9ppfm8hm7l76qr4dv1ito2f3620rvvbv.apps.googleusercontent.com",
+          cookiepolicy: "single_host_origin",
+          // Request scopes in addition to 'profile' and 'email'
+          //scope: 'additional_scope'
+        });
+        attachSignin(document.getElementById("customBtn"));
+      });
+    };
+
+    function attachSignin(element) {
+      console.log(element.id);
+      auth2.attachClickHandler(
+        element,
+        {},
+        function (googleUser) {
+          document.getElementById("name").innerText =
+            "Signed in: " + googleUser.getBasicProfile().getName();
+        },
+        function (error) {
+          alert(JSON.stringify(error, undefined, 2));
+        }
+      );
+    }
+  </script>
+  <style type="text/css">
+   
+    #gSignInWrapper{
+      display: inline-block;
+      margin: 3px;
+      padding: 0;
+      text-align: left;
+      width: 35%;
+      /* min-height: 50px; */
+       /* background-color: blue;  */
+      height: auto;   
+    }
+   #fb{
+      display: inline-block;
+      margin: 3px;
+      padding: 0;
+      vertical-align: middle;
+      text-align: right;
+      width: 55%;
+/*       
+       background-color: blue;  */
+      height: auto;   
+    }
+  
+    #customBtn {
+      display: inline-block;
+      margin-top: 3px;
+      margin-bottom: 3px;
+      /* padding-left: 10px;
+      padding-right: 10px; */
+      text-align: left;
+      /*min-height: 50px;*/
+        /* background-color:blue;   */
+      height: auto;
+    }
+    .fb-login-button{
+      display: inline-block;
+      margin: 3px;
+      padding:0;
+
+      text-align: right;
+      /* min-height: 50px; */
+      /* background-color: blue;  */
+      height: auto;
+    }
+    #customBtn {
+      background: white;
+      display: inline-block;
+      color: #444;
+      width: 100%;
+      border-radius: 5px;
+      border: thin solid grey;
+      box-shadow: 1px 1px 1px grey;
+      white-space: nowrap;
+    }
+    #customBtn:hover {
+      cursor: pointer;
+    }
+    span.label {
+      font-family: serif;
+      font-weight: normal;
+    }
+    span.icon {
+      background: url("./g-normal.png") transparent 5px 50% no-repeat;
+      display: inline-block;
+      vertical-align: middle;
+      width: 42px;
+      height: 40px;
+    }
+    span.buttonText {
+      display: inline-block;
+      vertical-align: middle;
+      padding-left: 10px;
+      padding-right: 42px;
+      font-size: 14px;
+      font-weight: bold;
+      /* Use the Roboto font that is loaded in the <head> */
+      font-family: "Roboto", sans-serif;
+    }
+  </style>
+    <style>
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      /* Full-width input fields */
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+
+      /* Set a style for all buttons */
+      button {
+        background-color: #24a0ed;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      button:hover {
+        opacity: 0.8;
+      }
+
+      /* Extra styles for the cancel button */
+      .cancelbtn {
+        width: auto;
+        padding: 10px 18px;
+        background-color: #d9534f;
+      }
+
+      /* Center the image and position the close button */
+      .imgcontainer {
+        text-align: center;
+        margin: 24px 0 12px 0;
+        position: relative;
+      }
+      p {
+        text-align: center;
+      }
+      img.avatar {
+        width: 40%;
+      }
+
+      .container {
+        padding: 16px;
+        border-radius: 5px;
+      }
+
+      span.psw {
+        float: right;
+        padding-top: 16px;
+      }
+
+      /* The Modal (background) */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+      
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: scroll; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        padding-top: 60px;
+      }
+
+      /* Modal Content/Box */
+      .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 30% auto; /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        border-radius: 5px;
+        min-width: 425px;
+        width: 31%; /* Could be more or less, depending on screen size */
+      }
+
+      /* The Close Button (x) */
+      .close {
+        position: absolute;
+        right: 25px;
+        top: 0;
+        color: #000;
+        font-size: 35px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: red;
+        cursor: pointer;
+      }
+
+      /* Add Zoom Animation */
+      .animate {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s;
+      }
+
+      @-webkit-keyframes animatezoom {
+        from {
+          -webkit-transform: scale(0);
+        }
+        to {
+          -webkit-transform: scale(1);
+        }
+      }
+
+      @keyframes animatezoom {
+        from {
+          transform: scale(0);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+      button {
+        border-radius: 5px;
+      }
+      /* Change styles for span and cancel button on extra small screens */
+      @media screen and (max-width: 300px) {
+        span.psw {
+          display: block;
+          float: none;
+        }
+        .cancelbtn {
+          width: 100%;
+        }
+      }
+    </style>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  </head>
+  <body>
+    <h2>Modal Login Form</h2>
+
+    <button
+      onclick="document.getElementById('id01').style.display='block'"
+      style="width: auto;"
+    >
+      Login
+    </button>
+
+    <div id="id01" class="modal">
+      <form
+        class="modal-content animate"
+        action="#"
+        method="post"
+      >
+        <div class="imgcontainer">
+          <span
+            onclick="document.getElementById('id01').style.display='none'"
+            class="close"
+            title="Close Modal"
+            >&times;</span
+          >
+          <img src="mksmth.png" class="avatar" />
+        </div>
+
+        <div class="container">
+          <label for="uname"><b>Username</b></label>
+          <input
+            type="text"
+            placeholder="Enter Username"
+            name="uname"
+            required
+          />
+
+          <label for="psw"><b>Password</b></label>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            name="psw"
+            required
+          />
+
+          <button type="submit">Login</button>
+        <div id="name"></div>
+        <script>
+          startApp();
+        </script>
+      <hr>
+        <div id="fb-root"></div>
+        <div class="container-name">
+         
+        <div id="gSignInWrapper">
+            <!-- <span class="label">Sign in with:</span> -->
+            <div id="customBtn" class="customGPlusSignIn">
+              <span class="icon"></span>
+              <span class="buttonText" style="text-align: left;">Google</span>
+            </div>
+          </div>
+          <div id="fb">
+          <div
+            class="fb-login-button"
+            data-size="large"
+            data-button-type="login_with"
+            data-layout="default"
+            data-width="100px"
+            data-max-rows="1"
+            data-auto-logout-link="false"
+            data-use-continue-as="false"
+            data-width="120px"
+            margin="0"
+          ></div>
+        </div> 
+        </div>
+        <label>
+          <input type="checkbox" checked="checked" name="remember" /> Remember
+          me
+        </label>
+      </div>
+      
+    <div id="logreg-forms">
+     
+      <div class="container" style="background-color: #f1f1f1;">
+        <button
+          type="button" 
+          onclick="document.getElementById('id01').style.display='none'"
+          class="cancelbtn"
+        >
+          Cancel
+        </button>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+      </div>
+      <link rel="import" href="../social/index.html">
+        </form>  
+   
+  </body>
+  <script
+      async
+      defer
+      crossorigin="anonymous"
+      src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v7.0&appId=558047108219015&autoLogAppEvents=1"
+      nonce="j7pccYbV"
+    ></script>
+</html> 
